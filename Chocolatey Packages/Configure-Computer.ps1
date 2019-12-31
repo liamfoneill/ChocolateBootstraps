@@ -102,12 +102,6 @@ Set-Theme Paradox"
 Remove-Item –path ~\Desktop -include *.lnk -Recurse
 Remove-Item –path C:\Users\Public\Desktop -include *.lnk -Recurse
 
-#.\Set-FolderIcon.ps1 -Icon git.ico -Path ~\Repositories
-
-#Remove suggested items from Quick Access
-
-#Disable Recycle Bin Icon
-
 $StopWatch.Stop()
 $StopWatch.Elapsed()
 
@@ -131,4 +125,6 @@ Set Visual Studio to open blank project by default
 Change Visual Studio save folder to be ~\Repositories
 Add Git Logo to ~\Repositories folder
 Configure OneDrive + OneDrive for Business
+Disable Recycle Bin Icon
+Remove suggested items from Quick Access
 #>
