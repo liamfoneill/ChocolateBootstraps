@@ -53,8 +53,6 @@ visualstudio2019enterprise `
 dotnetcore-sdk `
 office365business `
 microsoft-teams `
-visualstudio2019-workload-azurebuildtools `
-visualstudio2019-workload-netcoretools `
 teamviewer
 
 if($Desktop){
@@ -69,7 +67,6 @@ powershell -Command "iwr -useb https://raw.githubusercontent.com/dapr/cli/master
 # NB: Docker needs to be running for init to work
 dapr init
 
-# VS Code Setup
 # Install VS Code Sync
 code --install-extension shan.code-settings-sync
 
@@ -83,12 +80,6 @@ Add-Content -Path '~\.gitconfig' -Value "[user]
 Install-PackageProvider -Name NuGet -Force
 Install-Module -Name PackageManagement -Repository PSGallery -Force
 Install-Module -Name PowerShellGet -Repository PSGallery -Force
-Install-Module -Name posh-git -Force -AllowPrerelease
-Install-Module -Name oh-my-posh -Force
-Install-Module -Name PSReadLine -AllowPrerelease -Force
-Add-Content -Path $PROFILE -Value "Import-Module posh-git
-Import-Module oh-my-posh
-Set-Theme Paradox"
 
 .\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME\Pictures"
 .\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME\Videos"
@@ -124,7 +115,7 @@ Move-location of Pictures Folder to .\OneDrive
 Copy Windows Terminal profile.json Settings In
 Set Visual Studio to open blank project by default
 Change Visual Studio save folder to be ~\Repositories
-Add Git Logo to ~\Repositories folder
+Add git.ico Logo to ~\Repositories folder
 Configure OneDrive + OneDrive for Business
 Disable Recycle Bin Icon
 Remove suggested items from Quick Access
