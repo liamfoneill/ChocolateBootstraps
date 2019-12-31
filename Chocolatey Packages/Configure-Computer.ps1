@@ -49,7 +49,6 @@ spotify `
 microsoft-teams `
 camtasia `
 nordvpn `
-visualstudio2019enterprise `
 dotnetcore-sdk `
 office365business `
 microsoft-teams `
