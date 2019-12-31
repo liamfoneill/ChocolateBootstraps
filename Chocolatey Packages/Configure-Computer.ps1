@@ -76,10 +76,6 @@ powershell -Command "iwr -useb https://raw.githubusercontent.com/dapr/cli/master
 # NB: Docker needs to be running for init to work
 dapr init
 
-# Install VS Code Sync
-code --install-extension shan.code-settings-sync
-
-
 Add-Content -Path '~\.gitconfig' -Value "[user] 
     name = Liam F. O`'Neill 
     email = liamfoneill@outlook.com"
@@ -115,4 +111,5 @@ Add git.ico Logo to ~\Repositories folder
 Configure OneDrive + OneDrive for Business
 Disable Recycle Bin Icon
 Remove suggested items from Quick Access
+Install Post-Git, oh-my-posh etc on PowerShell 7
 #>

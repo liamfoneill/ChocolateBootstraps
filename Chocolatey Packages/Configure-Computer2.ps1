@@ -6,6 +6,9 @@ Add-Content -Path $PROFILE -Value "Import-Module posh-git
 Import-Module oh-my-posh
 Set-Theme Paradox"
 
+# Install VS Code Sync
+code --install-extension shan.code-settings-sync
+
 #Clean Up Desktop
 Remove-Item -path ~\Desktop -include *.lnk -Recurse
 
