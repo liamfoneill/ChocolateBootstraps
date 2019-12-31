@@ -17,6 +17,17 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRes
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -NoRestart
 Enable-WindowsOptionalFeature -Online -FeatureName Containers-DisposableClientVM -All -NoRestart
 
+.\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME\Pictures"
+.\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME\Videos"
+.\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME\Repositories"
+.\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME\Documents"
+.\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME\Downloads"
+.\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME\Desktop"
+.\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME"
+
+New-Item -Path '~\Repositories' -ItemType Directory
+New-Item -Path '~\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1' -ItemType File
+
 # Install all Choco Apps
 choco install `
 microsoft-edge-insider `
@@ -69,8 +80,7 @@ dapr init
 # Install VS Code Sync
 code --install-extension shan.code-settings-sync
 
-New-Item -Path '~\Repositories' -ItemType Directory
-New-Item -Path '~\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1' -ItemType File
+
 Add-Content -Path '~\.gitconfig' -Value "[user] 
     name = Liam F. O`'Neill 
     email = liamfoneill@outlook.com"
@@ -80,20 +90,8 @@ Install-PackageProvider -Name NuGet -Force
 Install-Module -Name PackageManagement -Repository PSGallery -Force
 Install-Module -Name PowerShellGet -Repository PSGallery -Force
 
-.\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME\Pictures"
-.\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME\Videos"
-.\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME\Repositories"
-.\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME\Documents"
-.\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME\Downloads"
-.\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME\Desktop"
-.\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME"
-
-#Clean Up Desktop
-Remove-Item –path ~\Desktop -include *.lnk -Recurse
-Remove-Item –path C:\Users\Public\Desktop -include *.lnk -Recurse
-
 $StopWatch.Stop()
-$StopWatch.Elapsed()
+$StopWatch.Elapsed
 
 ### MANUAL TASKS ###
 <# 
