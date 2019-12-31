@@ -7,7 +7,7 @@ Import-Module oh-my-posh
 Set-Theme Paradox"
 
 #Clean Up Desktop
-Remove-Item –path ~\Desktop -include *.lnk -Recurse
+Remove-Item -path ~\Desktop -include *.lnk -Recurse
 
 #Some Problem with this
-Remove-Item –path C:\Users\Public\Desktop -include *.lnk -Recurse
+Remove-Item -path C:\Users\Public\Desktop -include *.lnk -Recurse

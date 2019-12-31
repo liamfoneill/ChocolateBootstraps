@@ -12,6 +12,9 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object
 
 choco feature enable -n=allowGlobalConfirmation
 
+New-Item -Path '~\Repositories' -ItemType Directory
+New-Item -Path '~\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1' -ItemType File
+
 # Windows Features
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -NoRestart
@@ -24,10 +27,6 @@ Enable-WindowsOptionalFeature -Online -FeatureName Containers-DisposableClientVM
 .\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME\Downloads"
 .\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME\Desktop"
 .\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME"
-
-New-Item -Path '~\Repositories' -ItemType Directory
-New-Item -Path '~\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1' -ItemType File
-
 # Install all Choco Apps
 choco install `
 microsoft-edge-insider `
