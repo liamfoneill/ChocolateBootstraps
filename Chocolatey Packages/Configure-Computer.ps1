@@ -2,7 +2,6 @@
 Param
 (
     [Parameter(Mandatory=$true,Position=1,HelpMessage="Set to true if you want to also install desktop apps")]
-    [ValidateSet("Pin", "Unpin")]
     [bool]$Desktop
 )
 
@@ -15,16 +14,15 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object
 choco feature enable -n=allowGlobalConfirmation
 
 # Windows Features
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
-Enable-WindowsOptionalFeature –FeatureName "Containers-DisposableClientVM" -All -Online
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -NoRestart
+Enable-WindowsOptionalFeature -Online -FeatureName Containers-DisposableClientVM -All -NoRestart
 
 # Install all Choco Apps
 choco install `
 microsoft-edge-insider `
 bitwarden `
 bitwarden-cli `
-visualstudio2019enterprise `
 vscode `
 terraform `
 pulumi `
@@ -52,6 +50,7 @@ spotify `
 microsoft-teams `
 camtasia `
 nordvpn `
+visualstudio2019enterprise `
 dotnetcore-sdk `
 office365business `
 microsoft-teams `
@@ -67,6 +66,7 @@ if($Desktop){
 
 # DAPR
 powershell -Command "iwr -useb https://raw.githubusercontent.com/dapr/cli/master/install/install.ps1 | iex"
+# NB: Docker needs to be running for init to work
 dapr init
 
 # VS Code Setup
@@ -74,15 +74,18 @@ dapr init
 code --install-extension shan.code-settings-sync
 
 New-Item -Path '~\Repositories' -ItemType Directory
-New-Item -Path '~\.gitconfig' -ItemType File
+New-Item -Path '~\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1' -ItemType File
 Add-Content -Path '~\.gitconfig' -Value "[user] 
     name = Liam F. O`'Neill 
     email = liamfoneill@outlook.com"
 
 # Powershell Modules
-Install-Module -Name posh-git -AllowPrerelease
-Install-Module -Name oh-my-posh
-Install-Module -Name PSReadLine -AllowPrerelease -Scope CurrentUser -Force -SkipPublisherCheck
+Install-PackageProvider -Name NuGet -Force
+Install-Module -Name PackageManagement -Repository PSGallery -Force
+Install-Module -Name PowerShellGet -Repository PSGallery -Force
+Install-Module -Name posh-git -Force -AllowPrerelease
+Install-Module -Name oh-my-posh -Force
+Install-Module -Name PSReadLine -AllowPrerelease -Force
 Add-Content -Path $PROFILE -Value "Import-Module posh-git
 Import-Module oh-my-posh
 Set-Theme Paradox"
@@ -95,6 +98,15 @@ Set-Theme Paradox"
 .\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME\Desktop"
 .\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME"
 
+#Clean Up Desktop
+Remove-Item –path ~\Desktop -include *.lnk -Recurse
+Remove-Item –path C:\Users\Public\Desktop -include *.lnk -Recurse
+
+#.\Set-FolderIcon.ps1 -Icon git.ico -Path ~\Repositories
+
+#Remove suggested items from Quick Access
+
+#Disable Recycle Bin Icon
 
 $StopWatch.Stop()
 $StopWatch.Elapsed()
@@ -119,5 +131,4 @@ Set Visual Studio to open blank project by default
 Change Visual Studio save folder to be ~\Repositories
 Add Git Logo to ~\Repositories folder
 Configure OneDrive + OneDrive for Business
-Enable Developer Mode
 #>

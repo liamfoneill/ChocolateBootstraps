@@ -67,7 +67,7 @@ If ($Action -eq "Pin")
             }
         Else
             {
-                $QuickAccess.Namespace("$Path").Self.InvokeVerb(“pintohome”)
+                $QuickAccess.Namespace("$Path").Self.InvokeVerb("pintohome")
             }
     }
 ElseIf ($Action -eq "Unpin")
