@@ -62,7 +62,8 @@ nordvpn `
 dotnetcore-sdk `
 office365business `
 microsoft-teams `
-teamviewer
+teamviewer `
+mousewithoutborders
 
 if($Desktop){
     choco install plexmediaserver
