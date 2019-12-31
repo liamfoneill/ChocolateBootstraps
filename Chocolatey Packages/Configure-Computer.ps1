@@ -10,7 +10,7 @@ $StopWatch = New-Object -TypeName System.Diagnostics.Stopwatch
 $StopWatch.Start()
 
 Set-ExecutionPolicy AllSigned
-Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
 choco feature enable -n=allowGlobalConfirmation
 
@@ -76,7 +76,7 @@ code --install-extension shan.code-settings-sync
 New-Item -Path '~\Repositories' -ItemType Directory
 New-Item -Path '~\.gitconfig' -ItemType File
 Add-Content -Path '~\.gitconfig' -Value "[user] 
-    name = Liam F. O'Neill 
+    name = Liam F. O`'Neill 
     email = liamfoneill@outlook.com"
 
 # Powershell Modules
@@ -119,4 +119,5 @@ Set Visual Studio to open blank project by default
 Change Visual Studio save folder to be ~\Repositories
 Add Git Logo to ~\Repositories folder
 Configure OneDrive + OneDrive for Business
+Enable Developer Mode
 #>
