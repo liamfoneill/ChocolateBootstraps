@@ -8,7 +8,6 @@ Param
 $StopWatch = New-Object -TypeName System.Diagnostics.Stopwatch
 $StopWatch.Start()
 
-Set-ExecutionPolicy AllSigned
 Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
 choco feature enable -n=allowGlobalConfirmation
@@ -40,7 +39,7 @@ python `
 azure-cli `
 docker-desktop `
 postman `
-powerbi `
+powerbi --ignore-checksums `
 kindle `
 azure-data-studio `
 sql-server-management-studio `
@@ -55,7 +54,8 @@ dotnetcore-sdk `
 office365business `
 microsoft-teams `
 visualstudio2019-workload-azurebuildtools `
-visualstudio2019-workload-netcoretools
+visualstudio2019-workload-netcoretools `
+teamviewer
 
 if($Desktop){
     choco install plexmediaserver
@@ -107,6 +107,7 @@ $StopWatch.Elapsed()
 
 ### MANUAL TASKS ###
 <# 
+Rename Computer
 Configure VS Code Sync with Gist d33ebfe8fe1762c237e5a662e1e58cd1
 Initiate VS Code Sync
 Install RUDR
