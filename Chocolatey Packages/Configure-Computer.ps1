@@ -63,7 +63,8 @@ dotnetcore-sdk `
 office365business `
 microsoft-teams `
 teamviewer `
-mousewithoutborders
+mousewithoutborders `
+windows-admin-center
 
 if($Desktop){
     choco install plexmediaserver
