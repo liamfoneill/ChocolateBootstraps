@@ -64,7 +64,8 @@ office365business `
 microsoft-teams `
 teamviewer `
 mousewithoutborders `
-windows-admin-center
+windows-admin-center `
+golang
 
 if($Desktop){
     choco install plexmediaserver
