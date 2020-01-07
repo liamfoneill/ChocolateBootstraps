@@ -65,7 +65,9 @@ microsoft-teams `
 teamviewer `
 mousewithoutborders `
 windows-admin-center `
-golang
+golang `
+jmeter `
+ChocolateyGUI
 
 if($Desktop){
     choco install plexmediaserver
