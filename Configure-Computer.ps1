@@ -1,10 +1,3 @@
-[CmdletBinding()]
-Param
-(
-    [Parameter(Mandatory=$true,Position=1,HelpMessage="Set to true if you want to also install desktop apps")]
-    [bool]$Desktop
-)
-
 $StopWatch = New-Object -TypeName System.Diagnostics.Stopwatch
 $StopWatch.Start()
 
@@ -12,8 +5,9 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object
 
 choco feature enable -n=allowGlobalConfirmation
 
-New-Item -Path '~\Repositories' -ItemType Directory
-New-Item -Path '~\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1' -ItemType File
+if (!(Test-Path -Path '~\Repositories')) { 
+    New-Item -ItemType Directory -Path '~\Repositories' -Force 
+}
 
 # Windows Features
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -NoRestart
@@ -29,8 +23,6 @@ Enable-WindowsOptionalFeature -Online -FeatureName Containers-DisposableClientVM
 .\Set-QuickAccess.ps1 -Action "Pin" -Path "c:\Users\$env:USERNAME"
 # Install all Choco Apps
 choco install `
-microsoft-edge-insider `
-bitwarden `
 bitwarden-cli `
 vscode `
 terraform `
@@ -39,9 +31,9 @@ kubernetes-cli `
 kubernetes-helm `
 minikube `
 draft `
-aks-engine `
+# aks-engine `
 az.powershell `
-powershell-preview `
+powershell-core `
 pester `
 git --params "/WindowsTerminal /NoGitLfs /SChannel /NoAutoCrlf /NoShellIntegration" `
 github-desktop `
@@ -49,7 +41,6 @@ python `
 azure-cli `
 docker-desktop `
 postman `
-powerbi --ignore-checksums `
 kindle `
 azure-data-studio `
 sql-server-management-studio `
@@ -59,22 +50,14 @@ spotify `
 microsoft-teams `
 camtasia `
 nordvpn `
-dotnetcore-sdk `
+dotnetcore-sdk --version=5.0.100 `
 office365business `
 microsoft-teams `
-teamviewer `
-mousewithoutborders `
 windows-admin-center `
 golang `
 jmeter `
-ChocolateyGUI
-
-if($Desktop){
-    choco install plexmediaserver
-    choco install sonarr
-    choco install radarr
-    choco install sabnzbd
-}
+ChocolateyGUI `
+linkshellextension
 
 # DAPR
 powershell -Command "iwr -useb https://raw.githubusercontent.com/dapr/cli/master/install/install.ps1 | iex"
@@ -84,11 +67,6 @@ dapr init
 Add-Content -Path '~\.gitconfig' -Value "[user] 
     name = Liam F. O`'Neill 
     email = liamfoneill@outlook.com"
-
-# Powershell Modules
-Install-PackageProvider -Name NuGet -Force
-Install-Module -Name PackageManagement -Repository PSGallery -Force
-Install-Module -Name PowerShellGet -Repository PSGallery -Force
 
 $StopWatch.Stop()
 $StopWatch.Elapsed
